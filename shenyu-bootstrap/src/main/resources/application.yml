@@ -16,6 +16,7 @@
 server:
   port: 9195
   address: 0.0.0.0
+  max-http-header-size: 50KB
   compression:
     enabled: true
     minResponseSize: 1MB # If the response data is greater than 1MB, enable compression.
@@ -107,7 +108,7 @@ shenyu:
       # set to false, user can custom the netty tcp server config.
       webServerFactoryEnabled: true
       selectCount: 1
-      workerCount: 8
+      workerCount: 15
       accessLog: false
       serverSocketChannel:
         soRcvBuf: 87380
@@ -234,8 +235,8 @@ shenyu:
     maxSize : 10
   sync:
     websocket:
-      urls: ws://localhost:9095/websocket
-      allowOrigin: ws://localhost:9195
+      urls: ws://172.30.0.83:9095/websocket
+      allowOrigin: ws://172.30.0.83:9195
 #    apollo:
 #      appId: shenyu
 #      meta: http://localhost:8080
@@ -300,7 +301,7 @@ shenyu:
     type: fixed
     threads: 16
   upstreamCheck:
-    enabled: false
+    enabled: true
     poolSize: 10
     timeout: 3000
     healthyThreshold: 1
@@ -313,7 +314,7 @@ shenyu:
   ribbon:
     serverListRefreshInterval: 10000
   metrics:
-    enabled: false
+    enabled: true
     name : prometheus
     host: 127.0.0.1
     port: 8090

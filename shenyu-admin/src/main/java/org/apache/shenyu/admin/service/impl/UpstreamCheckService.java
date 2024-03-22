@@ -57,20 +57,8 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PreDestroy;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Properties;
-import java.util.Set;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.TimeUnit;
+import java.util.*;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 /**
@@ -265,11 +253,17 @@ public class UpstreamCheckService {
     private void doCheck() {
         // check zombie
         if (!ZOMBIE_SET.isEmpty()) {
-            ZOMBIE_SET.forEach(this::checkZombie);
+            ZOMBIE_SET.forEach(any -> {
+                LOG.info("start the check zombie {}.", any.getCommonUpstream().getUpstreamUrl());
+                this.checkZombie(any);
+            });
         }
         // check up
         if (!UPSTREAM_MAP.isEmpty()) {
-            UPSTREAM_MAP.forEach(this::check);
+            UPSTREAM_MAP.forEach((key, value) -> {
+                LOG.info("start the check upstream {}.", value.stream().map(CommonUpstream::getUpstreamUrl).collect(Collectors.joining(",")));
+                this.check(key, value);
+            });
         }
     }
 
