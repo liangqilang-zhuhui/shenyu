@@ -320,7 +320,7 @@ public class UpstreamCheckService {
                 }
                 return null;
             }, invokeExecutor).exceptionally(ex -> {
-                LOG.error("An exception occurred during the check of url {}: {}", commonUpstream.getUpstreamUrl(), ex);
+                LOG.error("An exception occurred during the check of url {}: ", commonUpstream.getUpstreamUrl(), ex);
                 return null;
             }));
         }

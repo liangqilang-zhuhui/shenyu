@@ -369,6 +369,7 @@ INSERT INTO `permission` VALUES ('1351007708736266240', '1346358560427216896', '
 INSERT INTO `permission` VALUES ('1351007708740460544', '1346358560427216896', '1347048004105940992', '2022-05-25 18:02:53', '2022-05-25 18:02:53');
 INSERT INTO `permission` VALUES ('1351007708744654848', '1346358560427216896', '1347048101875167232', '2022-05-25 18:02:53', '2022-05-25 18:02:53');
 INSERT INTO `permission` VALUES ('1351007708744654849', '1346358560427216896', '1347048145877610496', '2022-05-25 18:02:53', '2022-05-25 18:02:53');
+INSERT INTO `permission` VALUES ('1351007708748849151', '1346358560427216896', '1347048240677269503', '2022-05-25 18:02:53', '2022-05-25 18:02:53');
 INSERT INTO `permission` VALUES ('1351007708748849152', '1346358560427216896', '1347048240677269504', '2022-05-25 18:02:53', '2022-05-25 18:02:53');
 INSERT INTO `permission` VALUES ('1351007708753043456', '1346358560427216896', '1347048316216684544', '2022-05-25 18:02:53', '2022-05-25 18:02:53');
 INSERT INTO `permission` VALUES ('1351007708757237760', '1346358560427216896', '1347048776029843456', '2022-05-25 18:02:53', '2022-05-25 18:02:53');
@@ -839,7 +840,7 @@ INSERT INTO `plugin` VALUES ('42', 'tcp', NULL, 'Proxy', 320, 1, '2023-05-30 18:
 INSERT INTO `plugin` VALUES ('43', 'loggingHuaweiLts', '{\"totalSizeInBytes\":\"104857600\",\"maxBlockMs\":\"0\",\"ioThreadCount\":\"1\",\"batchSizeThresholdInBytes\":\"524288\",\"batchCountThreshold\":\"4096\",\"lingerMs\":\"2000\",\"retries\":\"100\",\"baseRetryBackoffMs\":\"100\",\"maxRetryBackoffMs\":\"100\",\"enableLocalTest\":\"true\",\"setGiveUpExtraLongSingleLog\":\"false\"}', 'Logging', 177, 0, '2023-07-05 14:03:53.686', '2023-07-06 12:42:07.234', NULL);
 INSERT INTO `plugin` VALUES ('44', 'basicAuth', '{\"defaultHandleJson\":\"{\\\"authorization\\\":\\\"test:test123\\\"}\"}', 'Authentication', 150, 0, '2022-07-24 19:00:00', '2022-07-24 19:00:00', null);
 INSERT INTO `plugin` VALUES ('45', 'loggingRabbitMQ', '{\"host\":\"127.0.0.1\",\"port\":5672,\"password\":\"admin\",\"username\":\"admin\",\"exchangeName\":\"exchange.logging.plugin\",\"queueName\":\"queue.logging.plugin\",\"routingKey\":\"topic.logging\",\"virtualHost\":\"/\",\"exchangeType\":\"direct\",\"durable\":\"true\",\"exclusive\":\"false\",\"autoDelete\":\"false\"}', 'Logging', 171, 0, '2023-11-06 15:49:56.454', '2023-11-10 10:40:58.447', NULL);
- 
+
 -- ----------------------------
 -- Table structure for plugin_handle
 -- ----------------------------
@@ -1257,6 +1258,7 @@ INSERT INTO `resource` VALUES ('1347047747305484288', '1346777623011880960', 'SH
 INSERT INTO `resource` VALUES ('1347048004105940992', '1346777766301888512', 'SHENYU.BUTTON.SYSTEM.LIST', '', '', '', 2, 0, '', 1, 0, 'system:authen:list', 1, '2022-05-25 18:02:53', '2022-05-25 18:02:53');
 INSERT INTO `resource` VALUES ('1347048101875167232', '1346777766301888512', 'SHENYU.BUTTON.SYSTEM.DELETE', '', '', '', 2, 1, '', 1, 0, 'system:authen:delete', 1, '2022-05-25 18:02:53', '2022-05-25 18:02:53');
 INSERT INTO `resource` VALUES ('1347048145877610496', '1346777766301888512', 'SHENYU.BUTTON.SYSTEM.ADD', '', '', '', 2, 2, '', 1, 0, 'system:authen:add', 1, '2022-05-25 18:02:53', '2022-05-25 18:02:53');
+INSERT INTO `resource` VALUES ('1347048240677269503', '1346777766301888512', 'SHENYU.PLUGIN.BATCH.OPENED', '', '', '', 2, 3, '', 1, 0, 'system:authen:open', 1, '2022-05-25 18:02:53', '2022-05-25 18:02:53');
 INSERT INTO `resource` VALUES ('1347048240677269504', '1346777766301888512', 'SHENYU.BUTTON.SYSTEM.ENABLE', '', '', '', 2, 3, '', 1, 0, 'system:authen:disable', 1, '2022-05-25 18:02:53', '2022-05-25 18:02:53');
 INSERT INTO `resource` VALUES ('1347048316216684544', '1346777766301888512', 'SHENYU.BUTTON.SYSTEM.SYNCHRONIZE', '', '', '', 2, 4, '', 1, 0, 'system:authen:modify', 1, '2022-05-25 18:02:53', '2022-05-25 18:02:53');
 INSERT INTO `resource` VALUES ('1347048776029843456', '1346777766301888512', 'SHENYU.BUTTON.SYSTEM.EDIT', '', '', '', 2, 5, '', 1, 0, 'system:authen:edit', 1, '2022-05-25 18:02:53', '2022-05-25 18:02:53');
@@ -2077,4 +2079,16 @@ CREATE TABLE IF NOT EXISTS `alert_receiver`
     `date_created` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT 'create time',
     `date_updated` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT 'update time',
     PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for INT_LOCK
+-- ----------------------------
+DROP TABLE IF EXISTS `INT_LOCK`;
+CREATE TABLE IF NOT EXISTS INT_LOCK  (
+    `LOCK_KEY` CHAR(36) NOT NULL,
+    `REGION` VARCHAR(100) NOT NULL,
+    `CLIENT_ID` CHAR(36),
+    `CREATED_DATE` TIMESTAMP NOT NULL,
+    constraint INT_LOCK_PK primary key (LOCK_KEY, REGION)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
