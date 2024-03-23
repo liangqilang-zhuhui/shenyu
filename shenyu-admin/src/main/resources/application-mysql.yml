@@ -20,12 +20,12 @@ shenyu:
 
 spring:
   datasource:
-    #url: jdbc:mysql://onedb-boss-qa.weizhipin.com:3316/shenyu?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull
-    #username: o_shenyu_u2fw_pro_ltrl
-    #password: s9MMyxBgh1airz1BW3
-    url: jdbc:mysql://mysql-cn-north-1-fa9e1d1b349844ba.rds.jdcloud.com:3306/shenyu?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull
-    username: shenyu
-    password: q*8zBLM9Mh9v%m#J
+    url: jdbc:mysql://onedb-boss-qa.weizhipin.com:3316/shenyu?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull
+    username: o_shenyu_u2fw_pro_ltrl
+    password: s9MMyxBgh1airz1BW3
+    #url: jdbc:mysql://mysql-cn-north-1-fa9e1d1b349844ba.rds.jdcloud.com:3306/shenyu?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull
+    #username: shenyu
+    #password: q*8zBLM9Mh9v%m#J
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       connection-timeout: 30000
